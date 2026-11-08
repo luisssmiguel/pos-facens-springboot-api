@@ -1,0 +1,141 @@
+### ====================================================================
+### TESTES DOS ENDPOINTS DA AULA E EXERCÍCIOS 1 E 2
+### Pós-Graduação Facens - Desenvolvimento FullStack
+### Prof. Fabrício Tonetto Londero
+### ====================================================================
+
+@baseUrl = http://localhost:8080
+
+### --------------------------------------------------------------------
+### ENDPOINTS DA AULA: HelloController
+### --------------------------------------------------------------------
+
+### 1. Slide 26: GET /teste
+GET {{baseUrl}}/teste
+
+### 2. Slide 29: GET /hello/teste
+GET {{baseUrl}}/hello/teste
+
+### 3. Slide 30: GET /hello/hello
+GET {{baseUrl}}/hello/hello
+
+### 4. Slide 30: GET /hello/world
+GET {{baseUrl}}/hello/world
+
+### 5. Slide 35 e 37: POST /hello/world/{valor}
+POST {{baseUrl}}/hello/world/Oi
+
+### 6. Slide 38 e 39: POST /hello/hello/{valor1} com body
+POST {{baseUrl}}/hello/hello/7
+Content-Type: application/json
+
+3
+
+
+### --------------------------------------------------------------------
+### EXERCÍCIO 1 (Slide 40)
+### --------------------------------------------------------------------
+
+### Ex 1.1: GET /hello/{nome}
+GET {{baseUrl}}/hello/Fabricio
+
+### Ex 1.2: GET /calc/soma/{a}/{b} (PathVariable)
+GET {{baseUrl}}/calc/soma/10/5
+
+### Ex 1.2: GET /calc/soma?a=10&b=5 (QueryParams)
+GET {{baseUrl}}/calc/soma?a=10&b=5
+
+### Ex 1.2: Erro 400 se faltar parâmetro 'b'
+GET {{baseUrl}}/calc/soma?a=10
+
+### Ex 1.2: Erro 400 se faltar ambos os parâmetros
+GET {{baseUrl}}/calc/soma
+
+### Ex 1.3: GET /temperatura/{valor}/{de}/{para} (PathVariable) - 30 Celsius para Fahrenheit
+GET {{baseUrl}}/temperatura/30/C/F
+
+### Ex 1.3: GET /temperatura/convert?valor=30&de=C&para=F (QueryParams)
+GET {{baseUrl}}/temperatura/convert?valor=30&de=C&para=F
+
+### Ex 1.3: GET /temperatura - 100 Celsius para Kelvin
+GET {{baseUrl}}/temperatura/100/C/K
+
+### Ex 1.3: GET /temperatura - 32 Fahrenheit para Celsius
+GET {{baseUrl}}/temperatura/32/F/C
+
+### Ex 1.3: Erro 400 com unidade inválida (X e Y)
+GET {{baseUrl}}/temperatura/30/X/F
+
+
+### --------------------------------------------------------------------
+### PESSOA: ENDPOINTS DA AULA (Slides 44 - 48)
+### --------------------------------------------------------------------
+
+### Criar Pessoa 1: Fabrício
+POST {{baseUrl}}/pessoa/pessoa
+Content-Type: application/json
+
+{
+  "id": 1,
+  "nome": "Fabrício"
+}
+
+### Criar Pessoa 2: Felipe
+POST {{baseUrl}}/pessoa/pessoa
+Content-Type: application/json
+
+{
+  "id": 2,
+  "nome": "Felipe"
+}
+
+### Listar todas as pessoas
+GET {{baseUrl}}/pessoa/pessoas
+
+### Buscar pessoa por nome
+GET {{baseUrl}}/pessoa/pessoa/Fabrício
+
+
+### --------------------------------------------------------------------
+### EXERCÍCIO 2 (Slide 49)
+### --------------------------------------------------------------------
+
+### Ex 2.1: PUT /pessoa/{id} - Substitui tudo (id e nome)
+PUT {{baseUrl}}/pessoa/1
+Content-Type: application/json
+
+{
+  "id": 1,
+  "nome": "Fabrício Tonetto Londero"
+}
+
+### Ex 2.2: PATCH /pessoa/{id} - Atualiza parcial (só o nome)
+PATCH {{baseUrl}}/pessoa/2
+Content-Type: application/json
+
+{
+  "nome": "Felipe Atualizado Parcial"
+}
+
+### Ex 2.3: DELETE /pessoa/{id} - Remove e retorna 204 No Content
+DELETE {{baseUrl}}/pessoa/1
+
+### Consultar a lista após o DELETE (Pessoa 1 removida)
+GET {{baseUrl}}/pessoa/pessoas
+
+
+### --------------------------------------------------------------------
+### ORM / JPA / RELACIONAMENTOS: Autor e Livro (Slides 35 - 36)
+### --------------------------------------------------------------------
+
+### Slide 35: Lazy Loading de Autores com contagem de livros
+GET {{baseUrl}}/autores-lazy
+
+### Slide 36: Eager Loading de Livros com Nome do Autor
+GET {{baseUrl}}/livros-eager
+
+### Listar todos os Autores
+GET {{baseUrl}}/autores
+
+### Listar todos os Livros
+GET {{baseUrl}}/livros
