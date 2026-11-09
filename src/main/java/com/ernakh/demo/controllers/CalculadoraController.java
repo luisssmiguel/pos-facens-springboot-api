@@ -4,8 +4,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.Map;
 
 @RestController
@@ -13,54 +11,35 @@ import java.util.Map;
 public class CalculadoraController {
 
     // ==============================================================
-    // EXERCÍCIO 1 - Item 2: GET /calc/soma/{a}/{b} ou /calc/soma?a=10&b=5
+    // EXERCÍCIO 1 - Item 2 (Slide 40 do PDF)
+    // GET /calc/soma/{a}/{b} ou /calc/soma?a=10&b=5
     // Retorna: {"resultado": 15}
-    // Se faltar a ou b: erro 400 com mensagem clara
+    // Se faltar a ou b, retornar erro 400 com mensagem clara.
     // ==============================================================
 
-    // Versão via PathVariable: /calc/soma/{a}/{b}
+    // Versão PathVariable: /calc/soma/{a}/{b}
     @GetMapping("/soma/{a}/{b}")
     public ResponseEntity<?> somarPath(@PathVariable Integer a, @PathVariable Integer b) {
-        if (a == null || b == null) {
-            Map<String, String> erro = new HashMap<>();
-            erro.put("erro", "Parâmetros 'a' e 'b' são obrigatórios.");
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(erro);
-        }
-        Map<String, Integer> resposta = Collections.singletonMap("resultado", a + b);
-        return ResponseEntity.ok(resposta);
+        return ResponseEntity.ok(Map.of("resultado", a + b));
     }
 
-    // Caso o cliente chame apenas /calc/soma/{a} faltando o b
+    // Se faltar parâmetro no path
     @GetMapping("/soma/{a}")
     public ResponseEntity<?> somarPathFaltandoB(@PathVariable Integer a) {
-        Map<String, String> erro = new HashMap<>();
-        erro.put("erro", "O parâmetro 'b' está faltando na rota. Utilize /calc/soma/{a}/{b} ou /calc/soma?a=10&b=5.");
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(erro);
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                .body(Map.of("erro", "O parâmetro 'b' está faltando na rota."));
     }
 
-    // Versão via QueryParams: /calc/soma?a=10&b=5
+    // Versão QueryParams: /calc/soma?a=10&b=5
     @GetMapping("/soma")
     public ResponseEntity<?> somarQuery(
             @RequestParam(required = false) Integer a,
             @RequestParam(required = false) Integer b) {
 
-        if (a == null && b == null) {
-            Map<String, String> erro = new HashMap<>();
-            erro.put("erro", "Os parâmetros 'a' e 'b' são obrigatórios. Exemplo: /calc/soma?a=10&b=5");
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(erro);
+        if (a == null || b == null) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(Map.of("erro", "Os parâmetros 'a' e 'b' são obrigatórios."));
         }
-        if (a == null) {
-            Map<String, String> erro = new HashMap<>();
-            erro.put("erro", "O parâmetro 'a' é obrigatório.");
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(erro);
-        }
-        if (b == null) {
-            Map<String, String> erro = new HashMap<>();
-            erro.put("erro", "O parâmetro 'b' é obrigatório.");
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(erro);
-        }
-
-        Map<String, Integer> resposta = Collections.singletonMap("resultado", a + b);
-        return ResponseEntity.ok(resposta);
+        return ResponseEntity.ok(Map.of("resultado", a + b));
     }
 }
