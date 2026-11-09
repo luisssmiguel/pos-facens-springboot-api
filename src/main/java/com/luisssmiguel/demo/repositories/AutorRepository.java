@@ -1,6 +1,6 @@
-package com.ernakh.demo.repositories;
+package com.luisssmiguel.demo.repositories;
 
-import com.ernakh.demo.models.Autor;
+import com.luisssmiguel.demo.models.Autor;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

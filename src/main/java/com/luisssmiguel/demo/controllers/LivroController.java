@@ -1,7 +1,7 @@
-package com.ernakh.demo.controllers;
+package com.luisssmiguel.demo.controllers;
 
-import com.ernakh.demo.models.Livro;
-import com.ernakh.demo.repositories.LivroRepository;
+import com.luisssmiguel.demo.models.Livro;
+import com.luisssmiguel.demo.repositories.LivroRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

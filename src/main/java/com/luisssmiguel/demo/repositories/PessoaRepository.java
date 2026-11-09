@@ -1,6 +1,6 @@
-package com.ernakh.demo.repositories;
+package com.luisssmiguel.demo.repositories;
 
-import com.ernakh.demo.models.Pessoa;
+import com.luisssmiguel.demo.models.Pessoa;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

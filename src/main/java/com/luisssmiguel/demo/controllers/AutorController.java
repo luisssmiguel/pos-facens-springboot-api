@@ -1,7 +1,7 @@
-package com.ernakh.demo.controllers;
+package com.luisssmiguel.demo.controllers;
 
-import com.ernakh.demo.models.Autor;
-import com.ernakh.demo.repositories.AutorRepository;
+import com.luisssmiguel.demo.models.Autor;
+import com.luisssmiguel.demo.repositories.AutorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;

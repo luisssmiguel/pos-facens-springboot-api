@@ -1,9 +1,9 @@
-package com.ernakh.demo.configs;
+package com.luisssmiguel.demo.configs;
 
-import com.ernakh.demo.models.Autor;
-import com.ernakh.demo.models.Livro;
-import com.ernakh.demo.repositories.AutorRepository;
-import com.ernakh.demo.repositories.LivroRepository;
+import com.luisssmiguel.demo.models.Autor;
+import com.luisssmiguel.demo.models.Livro;
+import com.luisssmiguel.demo.repositories.AutorRepository;
+import com.luisssmiguel.demo.repositories.LivroRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -1,6 +1,6 @@
-package com.ernakh.demo.controllers;
+package com.luisssmiguel.demo.controllers;
 
-import com.ernakh.demo.models.Pessoa;
+import com.luisssmiguel.demo.models.Pessoa;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;

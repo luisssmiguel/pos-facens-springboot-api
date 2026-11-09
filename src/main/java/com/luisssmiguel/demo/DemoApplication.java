@@ -1,13 +1,13 @@
-package com.ernakh.demo;
+package com.luisssmiguel.demo;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ErnakhApplication {
+public class DemoApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ErnakhApplication.class, args);
+		SpringApplication.run(DemoApplication.class, args);
 	}
 
 }

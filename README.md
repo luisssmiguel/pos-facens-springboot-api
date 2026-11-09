@@ -1,8 +1,9 @@
 # Pós-Graduação Facens — Desenvolvimento FullStack
 ## Atividade: API RESTful com Spring Boot, JPA e Exercícios Práticos
 
-**Professor:** Fabrício Tonetto Londero  
-**Tecnologias:** Java 17, Spring Boot 3.2.5, Spring Web, Spring Data JPA, H2 Database, SpringDoc OpenAPI (Swagger), Maven.
+- **Aluno:** Luis Miguel (GitHub: [@luisssmiguel](https://github.com/luisssmiguel))
+- **Professor:** Fabrício Tonetto Londero  
+- **Tecnologias:** Java 17, Spring Boot 3.2.5, Spring Web, Spring Data JPA, H2 Database, SpringDoc OpenAPI (Swagger), Maven.
 
 ---
 
@@ -20,7 +21,7 @@ Este repositório contém a implementação completa de todo o conteúdo ministr
 
 2. **Exercício 1 (Slide 40):**
    - `GET /hello/{nome}` — Retorna saudação personalizada: `"Olá, {nome}!"`.
-   - `GET /calc/soma/{a}/{b}` e `/calc/soma?a=10&b=5` — Retorna soma em JSON: `{"resultado": 15}`. Se faltar `a` ou `b`, retorna erro `400 Bad Request` com mensagem explicativa.
+   - `GET /calc/soma/{a}/{b}` e `/calc/soma?a=10&b=5` — Retorna soma em JSON: `{"resultado": 15}`. Se faltar `a` ou `b`, retorna erro `400 Bad Request` com mensagem clara.
    - `GET /temperatura/{valor}/{de}/{para}` e `/temperatura/convert?valor=30&de=C&para=F` — Conversão bidirecional entre Celsius (`C`), Fahrenheit (`F`) e Kelvin (`K`). Valida unidades permitidas e retorna erro `400 Bad Request` se a unidade for inválida.
 
 3. **Exercício 2 (Slide 49):**
@@ -34,11 +35,11 @@ Este repositório contém a implementação completa de todo o conteúdo ministr
 
 ### Pré-requisitos
 - **Java JDK 17** instalado na máquina.
-- Git instalado (opcional, para versionamento).
+- Git instalado.
 
 ### Passo a passo pelo terminal
 
-1. Clone o repositório ou acerte a pasta do projeto:
+1. Acesse a pasta do projeto:
 ```bash
 cd pos-facens-springboot-api
 ```
@@ -82,14 +83,14 @@ Para rodar os testes:
 
 #### 1.1 `GET /hello/{nome}` (Exercício 1 - Item 1)
 - **Descrição:** Retorna a saudação no formato `"Olá, {nome}!"`.
-- **Exemplo de Requisição:** `GET /hello/Fabricio`
+- **Exemplo de Requisição:** `GET /hello/Luis`
 - **Resposta:** (HTTP 200)
 ```text
-Olá, Fabricio!
+Olá, Luis!
 ```
 
 #### 1.2 `GET /calc/soma/{a}/{b}` ou `/calc/soma?a=10&b=5` (Exercício 1 - Item 2)
-- **Descrição:** Retorna a soma de dois números inteiros. Suporta tanto parâmetros de rota (PathVariable) quanto query parameters. Valida a presença obrigatória dos dois operandos.
+- **Descrição:** Retorna a soma de dois números inteiros. Suporta tanto parâmetros de rota quanto query parameters. Valida a presença obrigatória dos dois operandos.
 - **Exemplo de Requisição:** `GET /calc/soma/10/5` ou `GET /calc/soma?a=10&b=5`
 - **Resposta Sucesso:** (HTTP 200)
 ```json
@@ -101,17 +102,12 @@ Olá, Fabricio!
 - **Resposta de Erro:** (HTTP 400 Bad Request)
 ```json
 {
-  "erro": "O parâmetro 'b' é obrigatório."
+  "erro": "Os parâmetros 'a' e 'b' são obrigatórios."
 }
 ```
 
 #### 1.3 `GET /temperatura/{valor}/{de}/{para}` ou `/temperatura/convert?valor=30&de=C&para=F` (Exercício 1 - Item 3)
 - **Descrição:** Converte valores de temperatura entre Celsius (`C`), Fahrenheit (`F`) e Kelvin (`K`).
-- **Fórmulas aplicadas:**
-  - $C \to F: (C \times 9/5) + 32$
-  - $C \to K: C + 273.15$
-  - $F \to C: (F - 32) \times 5/9$
-  - $K \to C: K - 273.15$
 - **Exemplo de Requisição:** `GET /temperatura/30/C/F`
 - **Resposta Sucesso:** (HTTP 200)
 ```json
@@ -126,8 +122,7 @@ Olá, Fabricio!
 - **Resposta de Erro:** (HTTP 400 Bad Request)
 ```json
 {
-  "status": 400,
-  "erro": "Unidade inválida informada ('X' ou 'F'). Apenas 'C', 'F' e 'K' são permitidos."
+  "erro": "Unidade inválida informada. Permitidos apenas 'C', 'F' ou 'K'."
 }
 ```
 
@@ -135,7 +130,7 @@ Olá, Fabricio!
 
 ### 2. Gerenciamento de Pessoas e Exercício 2
 
-Baseado na lista gerenciada pela aplicação (`/pessoa`), os métodos implementados incluem:
+Baseado na lista gerenciada pela aplicação (`/pessoa`):
 
 | Método | Endpoint | Descrição | Status HTTP |
 | :--- | :--- | :--- | :--- |
@@ -147,68 +142,23 @@ Baseado na lista gerenciada pela aplicação (`/pessoa`), os métodos implementa
 | **`PATCH`**| **`/pessoa/{id}`** | **Exercício 2:** Atualiza parcialmente (ex.: só o nome) | `200 OK` / `404 Not Found` |
 | **`DELETE`**| **`/pessoa/{id}`** | **Exercício 2:** Remove a pessoa da lista | `204 No Content` / `404 Not Found` |
 
-#### Exemplos de Uso do Exercício 2:
-
-- **PUT `/pessoa/1`** (Substituição Completa):
-  - *Payload:*
-    ```json
-    {
-      "id": 1,
-      "nome": "Fabrício Tonetto Londero"
-    }
-    ```
-  - *Resposta (200 OK):*
-    ```json
-    {
-      "id": 1,
-      "nome": "Fabrício Tonetto Londero"
-    }
-    ```
-
-- **PATCH `/pessoa/1`** (Atualização Parcial):
-  - *Payload:*
-    ```json
-    {
-      "nome": "Fabrício Londero (Editado Parcial)"
-    }
-    ```
-  - *Resposta (200 OK):*
-    ```json
-    {
-      "id": 1,
-      "nome": "Fabrício Londero (Editado Parcial)"
-    }
-    ```
-
-- **DELETE `/pessoa/1`** (Exclusão):
-  - *Resposta:* `HTTP 204 No Content` (sem corpo na resposta)
-
----
-
-### 3. ORM, JPA, Relacionamentos e HQL (Slides de Aula)
-
-- `GET /autores-lazy`: Demonstra busca de autores com carregamento preguiçoso (`FetchType.LAZY`) de livros.
-- `GET /livros-eager`: Demonstra busca de livros com carregamento antecipado (`FetchType.EAGER`) do autor associado.
-- Os dados são pré-carregados automaticamente na inicialização com o autor "Machado de Assis" e as obras "Dom Casmurro" e "Memórias Póstumas".
-
 ---
 
 ## 📦 Como Subir para o seu GitHub
 
-Para entregar o link do repositório ao professor:
+Para entregar o link do seu repositório:
 
 1. No terminal, dentro da pasta do projeto (`pos-facens-springboot-api`):
 ```bash
-git init
 git add .
-git commit -m "feat: implementacao completa das aulas e resolucao dos exercicios 1 e 2"
+git commit -m "feat: migracao de pacote para com.luisssmiguel.demo e resolucao completa dos exercicios"
 ```
 
-2. Crie um repositório no seu GitHub (ex.: `pos-facens-springboot-api`).
+2. Crie um repositório no seu GitHub chamado, por exemplo, `pos-facens-springboot-api` (ou `springboot-aula-pos`).
 
 3. Vincule a branch remota e envie os commits:
 ```bash
 git branch -M main
-git remote add origin https://github.com/<SEU_USUARIO>/<SEU_REPOSITORIO>.git
+git remote add origin https://github.com/luisssmiguel/pos-facens-springboot-api.git
 git push -u origin main
 ```
